@@ -1,0 +1,23 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dépendances Node
+node_modules/
+
+# Shopify CLI
+.shopify/
+
+# Fichiers système et éditeurs
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
