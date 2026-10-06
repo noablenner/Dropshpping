@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { formaterPrix } from '../lib/format';
+
+const produits = await getCollection('produits');
+---
+
+<Base
+  title="Socle technique en construction"
+  description="Site en construction. Page provisoire de la phase 0."
+  noindex
+>
+  <h1>Site en construction</h1>
+  <p>Page provisoire de la phase 0. Les produits ci-dessous sont fictifs et servent à tester les gabarits.</p>
+  <ul>
+    {
+      produits.map((produit) => (
+        <li>
+          <a href={`/produit/${produit.data.slug}/`}>{produit.data.titre}</a>,{' '}
+          {formaterPrix(produit.data.prix_vente_ttc_centimes)}
+        </li>
+      ))
+    }
+  </ul>
+</Base>
