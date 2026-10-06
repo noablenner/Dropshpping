@@ -6,9 +6,6 @@
 # Dépendances Node
 node_modules/
 
-# Shopify CLI
-.shopify/
-
 # Fichiers système et éditeurs
 .DS_Store
 Thumbs.db
