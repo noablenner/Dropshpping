@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formaterCm, formaterPrix } from '../../lib/format';
+
+export const getStaticPaths = (async () => {
+  const produits = await getCollection('produits');
+  return produits.map((produit) => ({
+    params: { slug: produit.data.slug },
+    props: { produit },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  produit: CollectionEntry<'produits'>;
+}
+
+const { produit } = Astro.props;
+const p = produit.data;
+
+const libellesImpermeabilite = {
+  etanche: 'étanche (garanti par le fournisseur)',
+  hydrofuge: 'hydrofuge (déperlant, pas étanche)',
+  non_communique: 'non communiqué par le fournisseur',
+} as const;
+---
+
+<Base title={p.titre} description={`Gabarit provisoire : ${p.titre}.`} noindex={p.test}>
+  {p.test && <p><strong>Produit fictif de test, non vendu.</strong></p>}
+  <h1>{p.titre}</h1>
+  <p>{formaterPrix(p.prix_vente_ttc_centimes)} TTC</p>
+  <table>
+    <caption>Dimensions</caption>
+    <tbody>
+      <tr><th scope="row">Longueur</th><td>{formaterCm(p.dimensions.longueur_cm)}</td></tr>
+      <tr><th scope="row">Largeur</th><td>{formaterCm(p.dimensions.largeur_cm)}</td></tr>
+      <tr><th scope="row">Hauteur</th><td>{formaterCm(p.dimensions.hauteur_cm)}</td></tr>
+      <tr><th scope="row">Diamètre</th><td>{formaterCm(p.dimensions.diametre_cm)}</td></tr>
+    </tbody>
+  </table>
+  <p>Matériau : {p.materiau ?? 'non communiqué'}</p>
+  <p>Imperméabilité : {libellesImpermeabilite[p.impermeabilite]}</p>
+</Base>

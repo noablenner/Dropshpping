@@ -1,0 +1,11 @@
+# Copier ce fichier en .dev.vars (jamais commité) pour tester les fonctions en local avec wrangler.
+# En production, ces variables se définissent dans Cloudflare Pages (voir docs/A_FAIRE_NOA.md).
+
+# Clé secrète Stripe de TEST uniquement (sk_test_...) tant que Noa n'a pas validé la production.
+STRIPE_SECRET_KEY=
+
+# Secret de signature du webhook Stripe (whsec_...).
+STRIPE_WEBHOOK_SECRET=
+
+# URL publique du site, sans slash final. En local : http://localhost:8788
+SITE_URL=

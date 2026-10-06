@@ -1,0 +1,30 @@
+{
+  "test": true,
+  "sku_cj": "TEST-0002",
+  "variante": "TEST diamètre 120 cm",
+  "ean": null,
+  "titre": "PRODUIT TEST : housse table de jardin ronde diamètre 120 cm",
+  "slug": "test-housse-table-de-jardin-ronde-120",
+  "dimensions": {
+    "longueur_cm": null,
+    "largeur_cm": null,
+    "hauteur_cm": 75,
+    "diametre_cm": 120
+  },
+  "materiau": "TEST, donnée fictive",
+  "grammage_gm2": null,
+  "impermeabilite": "non_communique",
+  "fixation": null,
+  "cout_produit_centimes": null,
+  "cout_envoi_centimes": null,
+  "prix_vente_ttc_centimes": 2990,
+  "poids_kg": null,
+  "images": [],
+  "entrepot": null,
+  "tags": {
+    "famille": "table-de-jardin",
+    "forme": "ronde",
+    "dimension": "120"
+  },
+  "disponibilite": "rupture"
+}

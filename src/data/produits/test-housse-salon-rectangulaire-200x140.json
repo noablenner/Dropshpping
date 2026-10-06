@@ -1,0 +1,30 @@
+{
+  "test": true,
+  "sku_cj": "TEST-0001",
+  "variante": "TEST 200 x 140 x 80 cm",
+  "ean": null,
+  "titre": "PRODUIT TEST : housse salon de jardin rectangulaire 200 x 140 x 80 cm",
+  "slug": "test-housse-salon-de-jardin-rectangulaire-200x140",
+  "dimensions": {
+    "longueur_cm": 200,
+    "largeur_cm": 140,
+    "hauteur_cm": 80,
+    "diametre_cm": null
+  },
+  "materiau": "TEST, donnée fictive",
+  "grammage_gm2": null,
+  "impermeabilite": "non_communique",
+  "fixation": null,
+  "cout_produit_centimes": null,
+  "cout_envoi_centimes": null,
+  "prix_vente_ttc_centimes": 4990,
+  "poids_kg": null,
+  "images": [],
+  "entrepot": null,
+  "tags": {
+    "famille": "salon-de-jardin",
+    "forme": "rectangulaire",
+    "dimension": "200x140"
+  },
+  "disponibilite": "rupture"
+}
