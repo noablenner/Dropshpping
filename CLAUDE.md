@@ -23,13 +23,23 @@ Pile technique imposée :
 
 Nom de marque : [NOM DE MARQUE]
 Domaine : [DOMAINE.fr]
-Société éditrice : [RAISON SOCIALE, forme, capital, SIREN, adresse du siège, RCS, n° TVA intracommunautaire]
+Société éditrice : Agence ABS, SAS au capital de [CAPITAL] €, siège social 53 avenue de Colmar, 68200 Mulhouse, SIREN [SIREN], RCS [VILLE ET NUMÉRO RCS], n° TVA intracommunautaire [N° TVA]
+Régime de TVA : [RÉGIME DE TVA]. La règle de prix ci-dessous suppose une TVA collectée à 20 %.
 Directeur de publication : [NOM]
-Email de contact : [EMAIL]
-Téléphone service client : [TÉLÉPHONE ou "non communiqué"]
-Médiateur de la consommation : [NOM ET URL DU MÉDIATEUR]
-Règle de prix : prix de vente TTC = (coût produit CJ + frais d'envoi CJ depuis l'entrepôt UE) × [COEFFICIENT, ex. 1,8], arrondi à X,90 €, marge brute minimale de [X] € par commande après commission Stripe
-Frais de livraison affichés au client : [ex. offerts dès X €, sinon X €]
+Email de contact : [EMAIL], reçu sur le domaine via Cloudflare Email Routing
+Téléphone service client : [TÉLÉPHONE], obligatoire
+Médiateur de la consommation : [NOM ET URL DU MÉDIATEUR], obligatoire, choisi sur la liste officielle de la CECMC, de préférence facturé au dossier plutôt qu'à l'adhésion
+
+Règle de prix (règle unique, appliquée par scripts/importer-catalogue.mjs) :
+  coût_EUR = (prix produit CJ + port CJ vers la France, en USD) × taux USD/EUR du jour × 1,03
+  prix_HT = max(coût_EUR × 2 ; coût_EUR + frais Stripe estimés + marge minimale de [X] €)
+  prix_TTC = prix_HT × 1,20, arrondi au X,90 € supérieur
+  Le taux USD/EUR, le coefficient de change (1,03), le coefficient de marge (2), l'estimation des frais Stripe et la marge minimale sont des paramètres du script, jamais des valeurs codées en dur.
+
+Livraison : port intégré au prix de vente. Affichage "Livraison offerte" en France métropolitaine. Aucun frais de port ajouté au panier ni dans Stripe Checkout.
+Retours : à l'adresse du siège (53 avenue de Colmar, 68200 Mulhouse). Frais de retour à la charge du client, sauf produit défectueux ou erreur de notre part. À écrire clairement dans les CGV et la politique de retour.
+Emails : aucun service d'envoi au lancement. Le client reçoit le reçu Stripe. Noa reçoit les notifications de paiement de Stripe. Le webhook vérifie la signature et journalise, rien de plus.
+
 Délai de livraison annoncé : [ex. 4 à 8 jours ouvrés], toujours plus long que le délai réel constaté
 Pays de vente : France métropolitaine uniquement au lancement
 
