@@ -18,6 +18,13 @@ CLAUDE.md section 5 le dit : si CJ ne couvre pas la priorité 1 en entrepôt eur
 3. Notez combien de produits distincts, avec des dimensions précises, sont réellement en stock en Europe. Envoyez à Claude 5 à 10 liens avec le coût produit et le coût d'envoi vers la France.
 4. En dessous d'une quinzaine de housses de mobilier en stock en Europe, dites-le avant la phase 1.
 
+### 0 bis. Société éditrice : Agence ABS (SAS)
+
+1. Vérifiez dans les statuts (article « Objet ») et sur l'extrait Kbis que l'objet social couvre la **vente au détail en ligne** ou le commerce de marchandises à distance. Une formule large du type « toutes opérations commerciales » peut suffire, mais faites-le confirmer par votre expert-comptable.
+2. Si l'objet ne couvre pas cette activité, il faut modifier les statuts (décision des associés, puis formalité au greffe). C'est payant, et à faire avant d'activer Stripe en réel.
+3. Communiquez à Claude, pour CLAUDE.md section 3 : le capital, le SIREN, le RCS (ville et numéro), le n° de TVA intracommunautaire et le régime de TVA. La règle de prix suppose une TVA collectée à 20 %. Si ce n'est pas votre cas, prévenez avant la phase 2.
+4. Le code APE et l'objet social seront aussi vérifiés par Stripe lors de l'activation du compte.
+
 ### 1. Acheter le nom de domaine (environ 10 € par an)
 
 1. Choisissez le nom de marque et vérifiez qu'il est libre sur data.inpi.fr (classes 20, 22 et 24).
@@ -84,6 +91,42 @@ Prérequis : le travail de Claude est sur la branche `claude/trusting-hypatia-8w
 3. Enregistrez, puis relancez un déploiement (Deployments > Retry deployment) pour que les variables soient prises en compte.
 4. Ne collez jamais ces clés dans le chat, dans un fichier du repo ou dans un commit.
 
+### 8. Choisir le médiateur de la consommation (obligatoire, coût accepté)
+
+Préférence : un médiateur **facturé au dossier**, plutôt qu'une adhésion annuelle ou pluriannuelle.
+1. Ouvrez la liste officielle des médiateurs référencés par la CECMC (Commission d'évaluation et de contrôle de la médiation de la consommation) : site economie.gouv.fr, rubrique « Médiation de la consommation » > « Vous êtes un professionnel » > « Choisir un médiateur de la consommation » > « Médiateurs référencés ». La liste existe aussi par secteur d'activité.
+2. Ne retenez que les médiateurs compétents pour le secteur **« Vente en ligne, vente à distance »** ou multisectoriels. Un médiateur qui ne figure pas sur cette liste ne remplit pas l'obligation légale.
+3. Pour chaque candidat, ouvrez sa page tarifs et notez :
+   - frais d'adhésion ou d'inscription (montant et durée) ;
+   - prix par dossier, et s'il est dû même quand le consommateur abandonne ou que la demande est jugée irrecevable ;
+   - médiation à distance possible (email, visioconférence) ;
+   - date de mise à jour de la page tarifs.
+4. Choisissez le moins cher à l'usage pour quelques litiges par an. Si aucun n'est facturé uniquement au dossier, prenez la plus petite adhésion assortie d'un prix par dossier bas.
+5. Signez la convention et gardez-en une copie.
+6. Donnez à Claude le nom exact, l'adresse postale et l'URL du site du médiateur : ces trois informations doivent figurer dans les CGV (phase 6).
+
+Claude n'a pas pu consulter la liste officielle ni les sites des médiateurs depuis sa session (accès réseau bloqué). Aucun nom n'est donc cité ici : la vérification vous revient.
+
+### 9. Recevoir les emails sur le domaine (Cloudflare Email Routing, gratuit)
+
+À faire après l'étape 4 (domaine actif sur Cloudflare).
+1. Cloudflare > votre domaine > Email > Email Routing > Activer (Get started).
+2. Créez l'adresse personnalisée `contact@votre-domaine.fr`, avec pour destination votre adresse personnelle (Gmail par exemple). Validez l'email de vérification envoyé à cette adresse.
+3. Acceptez l'ajout automatique des enregistrements DNS (MX et SPF) proposé par Cloudflare.
+4. Testez en écrivant à `contact@votre-domaine.fr` depuis une autre adresse.
+5. **Limite à connaître** : Email Routing ne sert qu'à recevoir. Vos réponses partiront de votre adresse personnelle, sauf à configurer plus tard un service d'envoi. On n'en utilise aucun au lancement (décision du 2026-10-06).
+6. Mettez cette adresse dans CLAUDE.md section 3 (email de contact).
+
+### 10. Activer les emails Stripe (reçu client et notification de paiement)
+
+C'est ce qui remplace tout service d'envoi d'emails au lancement.
+1. **Reçu client** : Stripe > Paramètres > Emails clients (Customer emails) > activer « Paiements réussis » (Successful payments).
+2. **Notification pour vous** : Stripe > Paramètres > Profil personnel (ou Équipe) > Notifications par email > activer « Paiements réussis » et « Litiges » (Disputes).
+3. Paramètres > Informations publiques sur l'entreprise : nom de marque, email de support (`contact@votre-domaine.fr`), téléphone de support, URL du site. Ces informations apparaissent sur le reçu et la page de paiement.
+4. Paramètres > Image de marque (Branding) : couleurs et logo provisoire, à faire en phase 3.
+5. À savoir : **en mode test, Stripe n'envoie pas automatiquement les reçus aux clients**. Le test de la phase 3 se vérifiera dans le tableau de bord Stripe (aperçu du reçu), pas dans une boîte mail. Vérifiez ce comportement en phase 7 avec un vrai petit paiement.
+6. Pour passer une commande chez CJ, ouvrez le paiement dans Stripe > Paiements : le SKU CJ, la variante, la quantité et l'adresse de livraison y figurent (mis en place en phase 3).
+
 ---
 
-Quand tout est fait : complétez la section 3 de CLAUDE.md, cochez les cases ci-dessus, puis lancez la phase 1. La phase 1 (mots-clés) n'a besoin que du test go/no-go de l'étape 0 et de la section 3 remplie : les étapes 1 à 7 peuvent avancer en parallèle.
+Quand tout est fait : complétez la section 3 de CLAUDE.md, cochez les cases ci-dessus, puis lancez la phase 1. La phase 1 (mots-clés) n'a besoin que du test go/no-go de l'étape 0 : les autres étapes peuvent avancer en parallèle, mais la section 3 doit être complète avant la phase 6 (légal).

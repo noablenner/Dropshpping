@@ -57,3 +57,25 @@ Tout le travail de l'ancienne phase 0 (commit `1556ce9`) qui était propre à l'
 
 ### Ce que Noa doit faire à la main
 Voir `docs/A_FAIRE_NOA.md`, section « Avant la phase 1 ».
+
+## Décisions de Noa après la phase 0 (2026-10-06)
+
+### Intégré
+- **CLAUDE.md section 3** (commit séparé, avec l'accord de Noa) :
+  - société éditrice Agence ABS, SAS, 53 avenue de Colmar, 68200 Mulhouse (capital, SIREN, RCS, n° TVA et régime de TVA restent entre crochets) ;
+  - téléphone obligatoire ;
+  - médiateur obligatoire, facturé au dossier de préférence ;
+  - règle de prix unique ;
+  - livraison offerte et intégrée au prix ;
+  - retours au siège, frais à la charge du client sauf produit défectueux ou erreur de notre part ;
+  - aucun service d'envoi d'emails.
+- **PHASES.md phase 3** : plus de frais de port dans Checkout. Le SKU CJ, la variante et la quantité sont portés par la session Stripe. Le webhook se limite à vérifier la signature et à journaliser.
+- **docs/A_FAIRE_NOA.md** : étapes ajoutées pour l'objet social de la société (0 bis), le choix du médiateur (8), Cloudflare Email Routing (9) et les emails Stripe (10).
+
+### Points d'interprétation à confirmer par Noa
+- **Arrondi « à X,90 € »** : écrit « au X,90 € supérieur ». Arrondir vers le bas pourrait faire passer le prix sous la marge minimale.
+- **Frais Stripe estimés** : ils dépendent du prix TTC final, qui dépend lui-même d'eux. Le script de la phase 2 utilisera une estimation majorante en paramètre (pourcentage plus part fixe, appliqués au prix TTC) et vérifiera la marge après arrondi.
+- **Logs du webhook** : les logs des Pages Functions sont consultables en temps réel dans Cloudflare mais ne sont pas conservés durablement sur l'offre gratuite. La source de vérité des commandes reste Stripe.
+
+### Non vérifié
+- La liste officielle des médiateurs (economie.gouv.fr) et les sites des médiateurs étaient bloqués par le réseau de la session. Aucun médiateur n'est donc cité dans A_FAIRE_NOA.md, et Noa fait la vérification.
